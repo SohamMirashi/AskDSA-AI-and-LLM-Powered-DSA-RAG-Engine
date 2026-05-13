@@ -4,13 +4,11 @@
 
 import asyncio
 import csv
-import re
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 
-# TARGET_URL = "https://www.geeksforgeeks.org/dsa/top-50-array-coding-problems-for-interviews/"
-TARGET_URL = "https://www.geeksforgeeks.org/dsa/array-data-structure-guide/"
-OUTPUT_FILE = r"D:\Programming\End-to-End-AI-Powered-DSA-RAG-Engine-AskDSA\Datasets\Dataset with links\links_array_data_structure.csv"
+TARGET_URL = r"https://www.geeksforgeeks.org/dsa/top-50-problems-on-hash-data-structure-asked-in-sde-interviews/"
+OUTPUT_FILE = r"D:\Programming\End-to-End-AI-Powered-DSA-RAG-Engine-AskDSA\links_greedy_top_20.csv"
 
 async def scrape_links():
     async with async_playwright() as pw:
@@ -32,11 +30,21 @@ async def scrape_links():
 
     soup = BeautifulSoup(html, "html.parser")
 
-    # Target exactly: div.html-chunk > ul > li > a
+    # Check the HTML structure before running the code
     links = []
     html_chunk = soup.find("div", class_="html-chunk")
 
     if html_chunk:
+        # ── Structure 1: div.html-chunk > ol > li > a
+        for ol in html_chunk.find_all("ol"):
+            for li in ol.find_all("li"):
+                a_tag = li.find("a", href=True)
+                if a_tag:
+                    href = a_tag["href"].strip()
+                    if href.startswith("https://www.geeksforgeeks.org"):
+                        links.append(href)
+
+        # ── Structure 2: div.html-chunk > ul > li > a
         for ul in html_chunk.find_all("ul"):
             for li in ul.find_all("li"):
                 a_tag = li.find("a", href=True)
@@ -45,10 +53,20 @@ async def scrape_links():
                     if href.startswith("https://www.geeksforgeeks.org"):
                         links.append(href)
 
+        # ── Structure 3: table > tbody > tr > td > a 
+        for table in html_chunk.find_all("table"):
+            for tr in table.find_all("tr"):
+                for td in tr.find_all("td"):
+                    a_tag = td.find("a", href=True)
+                    if a_tag:
+                        href = a_tag["href"].strip()
+                        if href.startswith("https://www.geeksforgeeks.org") and href not in links:
+                            links.append(href)
+
     # Save to CSV
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["link"])          # header
+        writer.writerow(["link"]) # header
         for link in links:
             writer.writerow([link])
 
