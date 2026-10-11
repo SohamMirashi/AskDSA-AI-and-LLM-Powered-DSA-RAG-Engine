@@ -1,0 +1,875 @@
+"category","url","title","description","examples","num_approaches","status","scraped_at","approach1_heading","approach1_solution","approach1_cpp","approach1_c","approach1_java","approach1_python","approach1_csharp","approach1_javascript","approach1_tc","approach1_sc","approach2_heading","approach2_solution","approach2_cpp","approach2_c","approach2_java","approach2_python","approach2_csharp","approach2_javascript","approach2_tc","approach2_sc","approach3_heading","approach3_solution","approach3_cpp","approach3_c","approach3_java","approach3_python","approach3_csharp","approach3_javascript","approach3_tc","approach3_sc","approach4_heading","approach4_solution","approach4_cpp","approach4_c","approach4_java","approach4_python","approach4_csharp","approach4_javascript","approach4_tc","approach4_sc"
+"array_data_structure","https://www.geeksforgeeks.org/dsa/print-alternate-elements-of-an-array/","Alternate elements of an array","Given an array arr[] , the task is to print every alternate element of the array starting from the first element. Examples:","Input: arr[] = [10, 20, 30, 40, 50] Output: 10 30 50 Explanation: Print the first element (10), skip the second element (20), print the third element (30), skip the fourth element(40) and print the fifth element(50). Input: arr[] = [-5, 1, 4, 2, 12] Output: -5 4 12","2","ok","2026-10-11T13:58:36+00:00","Iterative Approach","The idea is to start iterating from index 0, print the element at that index, and then increment the index by 2 to move to the next alternate element. Keep on printing the elements till we reach the end of the array.
+Time Complexity: O(n), where n is the number of elements in arr[] . Auxiliary Space: O(1)","// Iterate C++ Program to print alternate elements
+// of the array
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> getAlternates(vector<int> &arr) {
+    vector<int> res;
+
+    // Iterate over all alternate elements
+    for(int i = 0; i < arr.size(); i += 2) {
+    	res.push_back(arr[i]);
+    }
+    return res;
+}
+
+int main() {
+    vector<int> arr = {10, 20, 30, 40, 50};
+    vector<int> res = getAlternates(arr);
+    for(int x: res)
+        cout << x << "" "";
+}","// Iterate C Program to print alternate elements
+// of the array
+
+#include <stdio.h>
+
+void getAlternates(int arr[], int n) {
+
+    // Iterate over all alternate elements
+    for(int i = 0; i < n; i += 2) {
+        printf(""%d "", arr[i]);
+    }
+}
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    getAlternates(arr, size);
+    return 0;
+}","// Iterate Java Program to print alternate elements
+// of the array
+
+import java.util.*;
+
+class GfG {
+    static ArrayList<Integer> getAlternates(int[] arr) {
+        ArrayList<Integer> res = new ArrayList<>();
+
+        // Iterate over all alternate elements
+        for (int i = 0; i < arr.length; i += 2) {
+            res.add(arr[i]);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+        ArrayList<Integer> res = getAlternates(arr);
+        for (int x : res) {
+            System.out.print(x + "" "");
+        }
+    }
+}","# Iterate Python Program to print alternate elements
+# of the array
+
+def getAlternates(arr):
+    res = []
+
+    # Iterate over all alternate elements
+    for i in range(0, len(arr), 2):
+        res.append(arr[i])
+    return res
+
+if __name__ == ""__main__"":
+    arr = [10, 20, 30, 40, 50]
+    res = getAlternates(arr)
+    print("" "".join(map(str, res)))","// Iterate C# Program to print alternate elements
+// of the array
+
+using System;
+using System.Collections.Generic;
+
+class GfG {
+    static List<int> getAlternates(int[] arr) {
+        List<int> res = new List<int>();
+
+        // Iterate over all alternate elements
+        for (int i = 0; i < arr.Length; i += 2) {
+            res.Add(arr[i]);
+        }
+        return res;
+    }
+
+    static void Main() {
+        int[] arr = { 10, 20, 30, 40, 50 };
+        List<int> res = getAlternates(arr);
+        foreach (int x in res) {
+            Console.Write(x + "" "");
+        }
+    }
+}","// Iterate JavaScript Program to print alternate elements
+// of the array
+
+function getAlternates(arr) {
+    let res = [];
+
+    // Iterate over all alternate elements
+    for (let i = 0; i < arr.length; i += 2) {
+        res.push(arr[i]);
+    }
+    return res;
+}
+
+// Driver Code
+const arr = [10, 20, 30, 40, 50];
+const res = getAlternates(arr);
+console.log(res.join("" ""));","NULL","NULL","R ecursive Approach","We can also print the alternate elements using recursion. We start from index = 0, that is the first element of the array and print its value. We then call the recursive function again with the (index + 2) as the current index.
+Time Complexity: O(n), where n is the number of elements in arr[] . Auxiliary Space: O(n), for recursive call stack.","// Recursive C++ Program to print alternate elements
+// of the array
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Recursive function to store all alternate elements
+void getAlternatesRec(vector<int> &arr, int idx, vector<int>& res) {
+	if(idx < arr.size()) {
+    	res.push_back(arr[idx]);
+        getAlternatesRec(arr, idx + 2, res);
+    }
+}
+
+vector<int> getAlternates(vector<int> &arr) {
+    vector<int> res;
+    getAlternatesRec(arr, 0, res);
+    return res;
+}
+
+int main() {
+    vector<int> arr = {10, 20, 30, 40, 50};
+    vector<int> res = getAlternates(arr);
+    for(int x: res)
+        cout << x << "" "";
+}","","// Recursive Java Program to print alternate elements
+// of the array
+
+import java.util.ArrayList;
+
+class GfG {
+
+    // Recursive function to store all alternate elements
+    static void getAlternatesRec(int[] arr, int idx,
+                                 ArrayList<Integer> res) {
+        if (idx < arr.length) {
+            res.add(arr[idx]);
+            getAlternatesRec(arr, idx + 2, res);
+        }
+    }
+
+    static ArrayList<Integer> getAlternates(int[] arr) {
+        ArrayList<Integer> res = new ArrayList<>();
+        getAlternatesRec(arr, 0, res);
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+        ArrayList<Integer> res = getAlternates(arr);
+        for (int x : res) {
+            System.out.print(x + "" "");
+        }
+    }
+}","# Recursive Python Program to print alternate elements
+# of the array
+
+# Recursive function to store all alternate elements
+def getAlternatesRec(arr, idx, res):
+    if idx < len(arr):
+        res.append(arr[idx])
+        getAlternatesRec(arr, idx + 2, res)
+
+def getAlternates(arr):
+    res = []
+    getAlternatesRec(arr, 0, res)
+    return res
+
+if __name__ == ""__main__"":
+    arr = [10, 20, 30, 40, 50]
+    res = getAlternates(arr)
+    print("" "".join(map(str, res)))","// Recursive C# Program to print alternate elements
+// of the array
+
+using System;
+using System.Collections.Generic;
+
+class GfG {
+
+    // Recursive function to store all alternate elements
+    static void getAlternatesRec(int[] arr, int idx,
+                                 	List<int> res) {
+        if (idx < arr.Length) {
+            res.Add(arr[idx]);
+            getAlternatesRec(arr, idx + 2, res);
+        }
+    }
+
+    static List<int> getAlternates(int[] arr) {
+        List<int> res = new List<int>();
+        getAlternatesRec(arr, 0, res);
+        return res;
+    }
+
+    static void Main() {
+        int[] arr = { 10, 20, 30, 40, 50 };
+        List<int> res = getAlternates(arr);
+        foreach (int x in res) {
+            Console.Write(x + "" "");
+        }
+    }
+}","// Recursive JavaScript Program to print alternate
+// elements of the array
+
+// Recursive function to store all alternate elements
+function getAlternatesRec(arr, idx, res) {
+    if (idx < arr.length) {
+        res.push(arr[idx]);
+        getAlternatesRec(arr, idx + 2, res);
+    }
+}
+
+function getAlternates(arr) {
+    let res = [];
+    getAlternatesRec(arr, 0, res);
+    return res;
+}
+
+// Driver Code
+let arr = [10, 20, 30, 40, 50];
+let res = getAlternates(arr);
+console.log(res.join("" ""));","NULL","NULL","","","","","","","","","","","","","","","","","","","",""
+"array_data_structure","https://www.geeksforgeeks.org/dsa/leaders-in-an-array/","Leaders in an array","Given an array arr[] of size n , the task is to find all the Leaders in the array. An element is a Leader if it is greater than or equal to all the elements to its right side. Note: The rightmost element is always a leader. Examples:","Input: arr[] = [16, 17, 4, 3, 5, 2] Output: [17 5 2] Explanation: 17 is greater than all the elements to its right i.e., [4, 3, 5, 2], therefore 17 is a leader. 5 is greater than all the elements to its right i.e., [2], therefore 5 is a leader. 2 has no element to its right, therefore 2 is a leader. Input: arr[] = [1, 2, 3, 4, 5, 2] Output: [5 2] Explanation: 5 is greater than all the elements to its right i.e., [2], therefore 5 is a leader. 2 has no element to its right, therefore 2 is a leader.","2","ok","2026-10-11T13:58:43+00:00","[Naive Approach] Nested Loops - O(n^2) Time and O(1) Space","Use two loops. The outer loop runs from 0 to size - 1 and one by one pick all elements. The inner loop compares the picked element to all the elements on its right side. If the picked element is greater than all the elements to its right side, then the picked element is the leader.","#include <bits/stdc++.h>
+using namespace std;
+
+// Function to find the leaders in an array
+vector<int> leaders(vector<int>& arr) {
+    vector<int> res;
+    int n = arr.size();
+
+    for (int i = 0; i < n; i++) {
+        int j;
+
+        // Check elements to the right
+        // of the current element
+        for (j = i + 1; j < n; j++) {
+
+            // If a larger element is found,
+            // break the loop
+            if (arr[i] < arr[j])
+                break;
+        }
+
+        // If no larger element was found,
+        // the current element is a leader
+        if (j == n)
+            res.push_back(arr[i]);
+    }
+
+    return res;
+}
+
+int main() {
+    vector<int> arr = { 16, 17, 4, 3, 5, 2 };
+    vector<int> result = leaders(arr);
+    for (int res : result) {
+        cout << res << "" "";
+    }
+    cout << endl;
+
+    return 0;
+}","#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find the leaders in an array
+int* leaders(int arr[], int n, int* resSize) {
+    int* result = (int*)malloc(n * sizeof(int));
+    int count = 0;
+
+    for (int i = 0; i < n; i++) {
+        int j;
+
+        // Check elements to the right
+        for (j = i + 1; j < n; j++) {
+
+            // If a larger element is found
+            if (arr[i] < arr[j])
+                break;
+        }
+
+        // If no larger element was found
+        if (j == n)
+            result[count++] = arr[i];
+    }
+
+    *resSize = count;
+    return result;
+}
+
+int main() {
+    int arr[] = { 16, 17, 4, 3, 5, 2 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int resSize;
+
+    int* result = leaders(arr, n, &resSize);
+    for (int i = 0; i < resSize; i++) {
+        printf(""%d "", result[i]);
+    }
+    printf(""\n"");
+
+    free(result);
+    return 0;
+}","import java.util.ArrayList;
+
+class GfG {
+
+    // Function to find the leaders in an array
+    static ArrayList<Integer> leaders(int[] arr) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int n = arr.length;
+
+        for (int i = 0; i < n; i++) {
+            int j;
+
+            // Check elements to the right
+            for (j = i + 1; j < n; j++) {
+
+                // If a larger element is found
+                if (arr[i] < arr[j])
+                    break;
+            }
+
+            // If no larger element was found
+            if (j == n)
+                result.add(arr[i]);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 16, 17, 4, 3, 5, 2 };
+        ArrayList<Integer> result = leaders(arr);
+
+        for (int res : result) {
+            System.out.print(res + "" "");
+        }
+        System.out.println();
+    }
+}","# Function to find the leaders in an array
+def leaders(arr):
+    result = []
+    n = len(arr)
+
+    for i in range(n):
+
+        # Check elements to the right
+        for j in range(i + 1, n):
+
+            # If a larger element is found
+            if arr[i] < arr[j]:
+                break
+        else:
+            # If no larger element was found
+            result.append(arr[i])
+
+    return result
+
+if __name__ == ""__main__"":
+    arr = [16, 17, 4, 3, 5, 2]
+    result = leaders(arr)
+    print("" "".join(map(str, result)))","using System;
+using System.Collections.Generic;
+
+class GFG
+{
+// Function to find the leaders in an array
+public static List<int> leaders(int[] arr)
+{
+List<int> result = new List<int>();
+int n = arr.Length;
+
+    for (int i = 0; i < n; i++)
+    {
+        int j;
+
+        // Check elements to the right
+        for (j = i + 1; j < n; j++)
+        {
+            // If a larger element is found
+            if (arr[i] < arr[j])
+                break;
+        }
+
+        // If no larger element was found
+        if (j == n)
+            result.Add(arr[i]);
+    }
+
+    return result;
+}
+public static void Main() {
+    int[] arr = {16, 17, 4, 3, 5, 2};
+    List<int> result = leaders(arr);
+
+    foreach (int res in result) {
+        Console.Write(res + "" "");
+    }
+    Console.WriteLine();
+}
+
+}","// Function to find the leaders in an array
+function leaders(arr) {
+    const result = [];
+    const n = arr.length;
+
+    for (let i = 0; i < n; i++) {
+        let j;
+        // Check elements to the right
+        for (j = i + 1; j < n; j++) {
+            // If a larger element is found
+            if (arr[i] < arr[j])
+                break;
+        }
+
+        // If no larger element was found
+        if (j === n)
+            result.push(arr[i]);
+    }
+
+    return result;
+}
+//Driver Code
+const arr = [16, 17, 4, 3, 5, 2];
+const result = leaders(arr);
+
+console.log(result.join("" ""));","NULL","NULL","[Expected Approach] Suffix Maximum - O(n) Time and O(1) Space:","The idea is to scan all the elements from right to left and keep track of the maximum till now. When the maximum changes its value, add it to the result.
+Illustration:
+arr[] = {16, 17, 4, 3, 5, 2} Initially : maxRight = 2, res[] = { 2 }
+i = 4, maxRight = 5, res[] = { 2, 5 } i= 3, maxRight = 5, res[] = { 2, 5 } i = 2, maxRight = 5, res[] = { 2, 5 } i = 1, maxRight = 17, res[] = { 2, 5, 17 } i = 0, maxRight = 17, res[] = { 2, 5, 17 }
+Reverse res[] = {17, 5, 2} and return","#include <bits/stdc++.h>
+using namespace std;
+
+// Function to find the leaders in an array
+vector<int> leaders(vector<int>& arr) {
+    vector<int> res;
+    int n = arr.size();
+
+    // Start with the rightmost element
+    int maxRight = arr[n - 1];
+
+    // Rightmost element is always a leader
+    res.push_back(maxRight);
+
+    // Traverse the array from right to left
+    for (int i = n - 2; i >= 0; i--) {
+
+        if (arr[i] >= maxRight) {
+            maxRight = arr[i];
+            res.push_back(maxRight);
+        }
+    }
+
+    // Reverse the result array to maintain
+    // original order
+    reverse(res.begin(), res.end());
+
+    return res;
+}
+
+int main() {
+    vector<int> arr = { 16, 17, 4, 3, 5, 2 };
+    vector<int> res = leaders(arr);
+    for (int x : res) {
+        cout << x << "" "";
+    }
+    cout << endl;
+
+    return 0;
+}","#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find the leaders in an array
+int* leaders(int arr[], int n, int* resSize) {
+    int* result = (int*)malloc(n * sizeof(int));
+    int count = 0;
+
+    // Start with the rightmost element
+    int maxRight = arr[n - 1];
+
+    // Rightmost element is always a leader
+    result[count++] = maxRight;
+
+    // Traverse the array from right to left
+    for (int i = n - 2; i >= 0; i--) {
+        if (arr[i] >= maxRight) {
+            maxRight = arr[i];
+            result[count++] = maxRight;
+        }
+    }
+
+    // Reverse the result array
+    for (int i = 0; i < count / 2; i++) {
+        int temp = result[i];
+        result[i] = result[count - i - 1];
+        result[count - i - 1] = temp;
+    }
+
+    *resSize = count;
+    return result;
+}
+
+int main() {
+    int arr[] = { 16, 17, 4, 3, 5, 2 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int resSize;
+
+    int* result = leaders(arr, n, &resSize);
+    for (int i = 0; i < resSize; i++) {
+        printf(""%d "", result[i]);
+    }
+    printf(""\n"");
+    return 0;
+}","import java.util.ArrayList;
+import java.util.Collections;
+
+class GfG {
+
+    // Function to find the leaders in an array
+    static ArrayList<Integer> leaders(int[] arr) {
+        ArrayList<Integer> result = new ArrayList<>();
+        int n = arr.length;
+
+        // Start with the rightmost element
+        int maxRight = arr[n - 1];
+
+        // Rightmost element is always a leader
+        result.add(maxRight);
+
+        // Traverse the array from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] >= maxRight) {
+                maxRight = arr[i];
+                result.add(maxRight);
+            }
+        }
+
+        // Reverse the result list to maintain
+        // original order
+        Collections.reverse(result);
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 16, 17, 4, 3, 5, 2 };
+        ArrayList<Integer> result = leaders(arr);
+        for (int res : result) {
+            System.out.print(res + "" "");
+        }
+        System.out.println();
+    }
+}","# Function to find the leaders in an array
+def leaders(arr):
+    result = []
+    n = len(arr)
+
+    # Start with the rightmost element
+    maxRight = arr[-1]
+
+    # Rightmost element is always a leader
+    result.append(maxRight)
+
+    # Traverse the array from right to left
+    for i in range(n - 2, -1, -1):
+        if arr[i] >= maxRight:
+            maxRight = arr[i]
+            result.append(maxRight)
+
+    # Reverse the result list to maintain
+    # original order
+    result.reverse()
+
+    return result
+
+if __name__ == ""__main__"":
+    arr = [16, 17, 4, 3, 5, 2]
+    result = leaders(arr)
+    print("" "".join(map(str, result)))","using System;
+using System.Collections.Generic;
+
+class GFG
+{
+// Function to find the leaders in an array
+public static List<int> leaders(int[] arr)
+{
+List<int> result = new List<int>();
+int n = arr.Length;
+
+    if (n == 0)
+        return result;
+
+    // Start with the rightmost element
+    int maxRight = arr[n - 1];
+
+    // Rightmost element is always a leader
+    result.Add(maxRight);
+
+    // Traverse from right to left
+    for (int i = n - 2; i >= 0; i--)
+    {
+        if (arr[i] >= maxRight)
+        {
+            maxRight = arr[i];
+            result.Add(maxRight);
+        }
+    }
+
+    // Maintain original order
+    result.Reverse();
+
+    return result;
+}
+public static void Main() {
+    int[] arr = {16, 17, 4, 3, 5, 2};
+    List<int> result = leaders(arr);
+
+    foreach (int res in result) {
+        Console.Write(res + "" "");
+    }
+    Console.WriteLine();
+}
+
+}","// Function to find the leaders in an array
+function leaders(arr)
+{
+    const result = [];
+    const n = arr.length;
+
+    // Start with the rightmost element
+    let maxRight = arr[n - 1];
+
+    // Rightmost element is always a leader
+    result.push(maxRight);
+
+    // Traverse the array from right to left
+    for (let i = n - 2; i >= 0; i--) {
+        if (arr[i] >= maxRight) {
+            maxRight = arr[i];
+            result.push(maxRight);
+        }
+    }
+
+    // Reverse the result array to maintain
+    // original order
+    result.reverse();
+
+    return result;
+}
+
+// Driver code
+const arr = [ 16, 17, 4, 3, 5, 2 ];
+const result = leaders(arr);
+console.log(result.join("" ""));","NULL","NULL","","","","","","","","","","","","","","","","","","","",""
+"array_data_structure","https://www.geeksforgeeks.org/dsa/remove-duplicates-sorted-array/","Remove duplicates from Sorted Array","Given a sorted array arr[] of size n , the goal is to rearrange the array so that all distinct elements appear at the beginning in sorted order. Additionally, return the length of this distinct sorted subarray. Note : The elements after the distinct ones can be in any order and hold any value, as they don't affect the result. Examples:","Input: arr[] = [2, 2, 2, 2, 2] Output: [2] Explanation: All the elements are 2, So only keep one instance of 2. Input: arr[] = [1, 2, 2, 3, 4, 4, 4, 5, 5] Output: [1, 2, 3, 4, 5] Input : arr[] = [1, 2, 3] Output : [1, 2, 3] Explanation : No change as all elements are distinct.","2","ok","2026-10-11T13:58:49+00:00","[Naive Approach] Sorted Set - Works for Unsorted Also - O(n) Time and O(n) Space","Traverse the sorted array and insert each element into a set. A set does not allow duplicate values, so repeated elements are automatically removed. Finally, convert the set into an array/list and return it.","#include <iostream>
+#include <vector>
+#include <set>
+using namespace std;
+
+vector<int> removeDuplicates(vector<int>& arr) {
+
+    // Put all elements in a sorted set
+    set<int> st(arr.begin(), arr.end());
+
+    // Put set elements into a result array
+    return vector<int>(st.begin(), st.end());
+}
+
+int main() {
+    vector<int> arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+    vector<int> uniqueArr = removeDuplicates(arr);
+    for (int i = 0; i < uniqueArr.size(); i++)
+        cout << uniqueArr[i] << "" "";
+    return 0;
+}","","import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.TreeSet;
+import java.util.Set;
+
+public class Main {
+    public static ArrayList<Integer> removeDuplicates(int[] arr) {
+
+        // Put all elements in a sorted set
+        Set<Integer> st = new TreeSet<Integer>();
+        for (int num : arr) {
+            st.add(num);
+        }
+
+        // Put set elements into a result ArrayList
+        ArrayList<Integer> result = new ArrayList<Integer>(st);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+        ArrayList<Integer> uniqueArr = removeDuplicates(arr);
+        for (int i = 0; i < uniqueArr.size(); i++) {
+            System.out.print(uniqueArr.get(i) + "" "");
+        }
+    }
+}","from typing import List
+
+def removeDuplicates(arr: List[int]) -> List[int]:
+
+    # Put all elements in a sorted set
+    st = set(arr)
+
+    # Put set elements into a result array
+    return sorted(list(st))
+
+if __name__ == ""__main__"":
+    arr = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+    uniqueArr = removeDuplicates(arr)
+    for i in uniqueArr:
+        print(i, end=' ')","using System;
+using System.Collections.Generic;
+
+public class MainClass {
+    public static List<int> removeDuplicates(int[] arr) {
+
+        // Put all elements in a sorted set
+        SortedSet<int> st = new SortedSet<int>();
+        foreach (int num in arr) {
+            st.Add(num);
+        }
+
+        // Put set elements into a result List
+        List<int> result = new List<int>(st);
+        return result;
+    }
+
+    public static void Main(string[] args) {
+        int[] arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+        List<int> uniqueArr = removeDuplicates(arr);
+        for (int i = 0; i < uniqueArr.Count; i++) {
+            Console.Write(uniqueArr[i] + "" "");
+        }
+    }
+}","function removeDuplicates(arr) {
+
+    // Put all elements in a sorted set
+    let st = new Set(arr);
+
+    // Put set elements into a result array
+    return Array.from(st).sort((a, b) => a - b);
+}
+
+let arr = [1, 2, 2, 3, 4, 4, 4, 5, 5];
+let uniqueArr = removeDuplicates(arr);
+for (let i = 0; i < uniqueArr.length; i++) {
+    console.log(uniqueArr[i] + ' ');
+}","NULL","NULL","[Expected Approach] - Single Traversal - O(n) Time and O(1) Space","Since the array is sorted, all occurrences of an element would be consecutive. We mainly need to check if the current element is same as the previous element or not.
+Step by step implementation:
+Loop through the array for i = 0 to n-1. At each index i , if arr[i] is different from arr[i-1] , add it to the result. After the loop, the result contains the unique element.","#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> removeDuplicates(vector<int>& arr) {
+    int n = arr.size();
+    if (n <= 1)
+        return arr;
+
+    // Start from the second element
+    int idx = 1;
+
+    vector<int> result;
+    result.push_back(arr[0]);
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i]!= arr[i - 1]) {
+            result.push_back(arr[i]);
+        }
+    }
+    return result;
+}
+
+int main() {
+    vector<int> arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+    vector<int> result = removeDuplicates(arr);
+    for (int i = 0; i < result.size(); i++)
+        cout << result[i] << "" "";
+    return 0;
+}","","import java.util.ArrayList;
+
+public class Main {
+    public static ArrayList<Integer> removeDuplicates(int[] arr) {
+        int n = arr.length;
+
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(arr[0]);
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i]!= arr[i - 1]) {
+                result.add(arr[i]);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+        ArrayList<Integer> result = removeDuplicates(arr);
+        for (int i = 0; i < result.size(); i++) {
+            System.out.print(result.get(i) + "" "");
+        }
+    }
+}","from typing import List
+
+def removeDuplicates(arr: List[int]) -> List[int]:
+    n = len(arr)
+    if n <= 1:
+        return arr
+
+    # Start from the second element
+    idx = 1
+
+    result = []
+    result.append(arr[0])
+
+    for i in range(1, n):
+        if arr[i]!= arr[i - 1]:
+            result.append(arr[i])
+    return result
+
+if __name__ == ""__main__"":
+    arr = [1, 2, 2, 3, 4, 4, 4, 5, 5]
+    result = removeDuplicates(arr)
+    for i in range(len(result)):
+        print(result[i], end=' ')","using System;
+using System.Collections.Generic;
+
+public class MainClass {
+    public static List<int> removeDuplicates(int[] arr) {
+        int n = arr.Length;
+
+        List<int> result = new List<int>();
+        result.Add(arr[0]);
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i]!= arr[i - 1]) {
+                result.Add(arr[i]);
+            }
+        }
+        return result;
+    }
+
+    public static void Main(string[] args) {
+        int[] arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+        List<int> result = removeDuplicates(arr);
+        for (int i = 0; i < result.Count; i++) {
+            Console.Write(result[i] + "" "");
+        }
+    }
+}","","NULL","NULL","","","","","","","","","","","","","","","","","","","",""

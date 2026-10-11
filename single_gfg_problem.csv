@@ -1,0 +1,309 @@
+﻿source_url,source_csv,source_row,problem_title,problem_statement,examples,constraints,difficulty,approach_1_heading,approach_1_explanation,approach_1_tc,approach_1_sc,approach_1_cpp,approach_1_java,approach_1_python,approach_1_c,approach_1_csharp,approach_1_javascript,approach_2_heading,approach_2_explanation,approach_2_tc,approach_2_sc,approach_2_cpp,approach_2_java,approach_2_python,approach_2_c,approach_2_csharp,approach_2_javascript,approach_3_heading,approach_3_explanation,approach_3_tc,approach_3_sc,approach_3_cpp,approach_3_java,approach_3_python,approach_3_c,approach_3_csharp,approach_3_javascript,approach_4_heading,approach_4_explanation,approach_4_tc,approach_4_sc,approach_4_cpp,approach_4_java,approach_4_python,approach_4_c,approach_4_csharp,approach_4_javascript,scrape_status,scrape_error
+https://www.geeksforgeeks.org/dsa/print-alternate-elements-of-an-array/,,,Alternate elements of an array,"Given an array
+arr[]
+, the task is to print every
+alternate
+element of the array starting from the first element.
+Input:
+arr[] = [10, 20, 30, 40, 50]
+Output:
+10 30 50
+Explanation:
+Print the first element (10), skip the second element (20), print the third element (30), skip the fourth element(40) and print the fifth element(50).
+Input:
+arr[] = [-5, 1, 4, 2, 12]
+Output:
+-5 4 12",,,,Iterative Approach,"The idea is to start iterating from index 0, print the element at that index, and then increment the index by 2 to move to the next alternate element. Keep on printing the elements till we reach the end of the array.
+Time Complexity:
+O(n), where
+n
+is the number of elements in
+arr[]
+.
+Auxiliary Space:
+O(1)",,,"// Iterate C++ Program to print alternate elements
+// of the array
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> getAlternates(vector<int> &arr) {
+    vector<int> res;
+  
+    // Iterate over all alternate elements 
+    for(int i = 0; i < arr.size(); i += 2) {
+    	res.push_back(arr[i]);
+    }
+    return res;
+}
+
+int main() {
+    vector<int> arr = {10, 20, 30, 40, 50};
+    vector<int> res = getAlternates(arr); 
+    for(int x: res)
+        cout << x << "" "";
+}","// Iterate Java Program to print alternate elements
+// of the array
+
+import java.util.*;
+
+class GfG {
+    static ArrayList<Integer> getAlternates(int[] arr) {
+        ArrayList<Integer> res = new ArrayList<>();
+      
+        // Iterate over all alternate elements
+        for (int i = 0; i < arr.length; i += 2) {
+            res.add(arr[i]);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+        ArrayList<Integer> res = getAlternates(arr);
+        for (int x : res) {
+            System.out.print(x + "" "");
+        }
+    }
+}","# Iterate Python Program to print alternate elements
+# of the array
+
+def getAlternates(arr):
+    res = []
+    
+    # Iterate over all alternate elements
+    for i in range(0, len(arr), 2):
+        res.append(arr[i])
+    return res
+
+if __name__ == ""__main__"":
+    arr = [10, 20, 30, 40, 50]
+    res = getAlternates(arr)
+    print("" "".join(map(str, res)))","// Iterate C Program to print alternate elements
+// of the array
+
+#include <stdio.h>
+
+void getAlternates(int arr[], int n) {
+    
+    // Iterate over all alternate elements
+    for(int i = 0; i < n; i += 2) {
+        printf(""%d "", arr[i]);
+    }
+}
+
+int main() {
+    int arr[] = {10, 20, 30, 40, 50};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    getAlternates(arr, size);
+    return 0;
+}","// Iterate C# Program to print alternate elements
+// of the array
+
+using System;
+using System.Collections.Generic;
+
+class GfG {
+    static List<int> getAlternates(int[] arr) {
+        List<int> res = new List<int>();
+      
+        // Iterate over all alternate elements
+        for (int i = 0; i < arr.Length; i += 2) {
+            res.Add(arr[i]);
+        }
+        return res;
+    }
+
+    static void Main() {
+        int[] arr = { 10, 20, 30, 40, 50 };
+        List<int> res = getAlternates(arr);
+        foreach (int x in res) {
+            Console.Write(x + "" "");
+        }
+    }
+}","// Iterate JavaScript Program to print alternate elements
+// of the array
+
+function getAlternates(arr) {
+    let res = [];
+    
+    // Iterate over all alternate elements
+    for (let i = 0; i < arr.length; i += 2) {
+        res.push(arr[i]);
+    }
+    return res;
+}
+
+
+// Driver Code
+const arr = [10, 20, 30, 40, 50];
+const res = getAlternates(arr);
+console.log(res.join("" ""));",R ecursive Approach,"We can also print the alternate elements using recursion. We start from index = 0, that is the first element of the array and print its value. We then call the recursive function again with the (index + 2) as the current index.
+Time Complexity:
+O(n), where
+n
+is the number of elements in
+arr[]
+.
+Auxiliary Space:
+O(n), for recursive call stack.
+Company
+About Us
+Legal
+Privacy Policy
+Careers
+Contact Us
+Corporate Solution
+Campus Training Program
+Explore
+POTD
+Practice Problems
+Blogs
+Upskill Courses
+Connect
+Tutorials
+Programming Languages
+DSA
+Web Technology
+AI, ML & Data Science
+DevOps
+CS Core Subjects
+GATE
+School Subjects
+Software and Tools
+Courses
+ML and Data Science
+DSA and Placements
+Web Development
+Data Science
+DevOps & Cloud
+MongoDB Certifications
+Preparation Corner
+Interview Corner
+Aptitude
+Puzzles
+GfG 160
+System Design",,,"// Recursive C++ Program to print alternate elements
+// of the array
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Recursive function to store all alternate elements
+void getAlternatesRec(vector<int> &arr, int idx, vector<int>& res) {
+	if(idx < arr.size()) {
+    	res.push_back(arr[idx]);
+        getAlternatesRec(arr, idx + 2, res);
+    }
+}
+
+vector<int> getAlternates(vector<int> &arr) {
+    vector<int> res;
+    getAlternatesRec(arr, 0, res);
+    return res;
+}
+
+int main() {
+    vector<int> arr = {10, 20, 30, 40, 50};
+    vector<int> res = getAlternates(arr); 
+    for(int x: res)
+        cout << x << "" "";
+}","// Recursive Java Program to print alternate elements
+// of the array
+
+import java.util.ArrayList;
+
+class GfG {
+    
+    // Recursive function to store all alternate elements
+    static void getAlternatesRec(int[] arr, int idx, 
+                                 ArrayList<Integer> res) {
+        if (idx < arr.length) {
+            res.add(arr[idx]);
+            getAlternatesRec(arr, idx + 2, res);
+        }
+    }
+
+    static ArrayList<Integer> getAlternates(int[] arr) {
+        ArrayList<Integer> res = new ArrayList<>();
+        getAlternatesRec(arr, 0, res);
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+        ArrayList<Integer> res = getAlternates(arr);
+        for (int x : res) {
+            System.out.print(x + "" "");
+        }
+    }
+}","# Recursive Python Program to print alternate elements
+# of the array
+
+# Recursive function to store all alternate elements
+def getAlternatesRec(arr, idx, res):
+    if idx < len(arr):
+        res.append(arr[idx])
+        getAlternatesRec(arr, idx + 2, res)
+
+def getAlternates(arr):
+    res = []
+    getAlternatesRec(arr, 0, res)
+    return res
+
+if __name__ == ""__main__"":
+    arr = [10, 20, 30, 40, 50]
+    res = getAlternates(arr)
+    print("" "".join(map(str, res)))",,"// Recursive C# Program to print alternate elements
+// of the array
+
+using System;
+using System.Collections.Generic;
+
+class GfG {
+    
+    // Recursive function to store all alternate elements
+    static void getAlternatesRec(int[] arr, int idx, 
+                                 	List<int> res) {
+        if (idx < arr.Length) {
+            res.Add(arr[idx]);
+            getAlternatesRec(arr, idx + 2, res);
+        }
+    }
+
+    static List<int> getAlternates(int[] arr) {
+        List<int> res = new List<int>();
+        getAlternatesRec(arr, 0, res);
+        return res;
+    }
+
+    static void Main() {
+        int[] arr = { 10, 20, 30, 40, 50 };
+        List<int> res = getAlternates(arr);
+        foreach (int x in res) {
+            Console.Write(x + "" "");
+        }
+    }
+}","// Recursive JavaScript Program to print alternate
+// elements of the array
+
+// Recursive function to store all alternate elements
+function getAlternatesRec(arr, idx, res) {
+    if (idx < arr.length) {
+        res.push(arr[idx]);
+        getAlternatesRec(arr, idx + 2, res);
+    }
+}
+
+function getAlternates(arr) {
+    let res = [];
+    getAlternatesRec(arr, 0, res);
+    return res;
+}
+
+// Driver Code
+let arr = [10, 20, 30, 40, 50];
+let res = getAlternates(arr);
+console.log(res.join("" ""));",,,,,,,,,,,,,,,,,,,,,SUCCESS,
