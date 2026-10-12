@@ -311,7 +311,7 @@ from bs4 import BeautifulSoup, Tag
 # OUTPUT_CSV = Path("Datasets/Dataset with problems/problems.csv")
 
 INPUT_CSV  = Path("all_problem_links.csv")
-OUTPUT_CSV = Path("problems2.csv")
+OUTPUT_CSV = Path("problems.csv")
 
 MAX_APPROACHES = 4
 LANGS = ["cpp", "c", "java", "python", "csharp", "javascript"]  # column order
