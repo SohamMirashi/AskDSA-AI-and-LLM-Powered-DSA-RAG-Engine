@@ -23,6 +23,9 @@ LEVELS = {
        "for another language), including time and space complexity.",
 }
 
+# Short hints stay short (saves tokens); full solutions get room so they aren't cut off.
+MAX_TOKENS = {1: 350, 2: 500, 3: 1200, 4: 2000}
+
 SYSTEM = (
     "You are AskDSA, a Data Structures & Algorithms interview tutor. "
     "Your job is to help the student UNDERSTAND and reach the solution themselves, not to "
@@ -42,11 +45,12 @@ def build_context(results):
         blocks.append(block)
     return "\n\n---\n\n".join(blocks)
 
-def tutor(query, level=1, k=4, problem_url=None, dry_run=False):
-    r = Retriever()
+def tutor(query, level=1, k=4, problem_url=None, dry_run=False, retriever=None):
+    r = retriever or Retriever() # the API passes a shared, pre-loaded Retriever
     if problem_url:
-        # Student is on a specific problem: ground on that problem's own chunks.
         results = r.search(query, k=0, problem_url=problem_url)
+        if not results:                       # URL not in our DB -> fall back to semantic search
+            results = r.search(query, k=k)
     else:
         results = r.search(query, k=k)
     context = build_context(results)
@@ -62,7 +66,7 @@ def tutor(query, level=1, k=4, problem_url=None, dry_run=False):
         print("\n=== prompt sent to the model (truncated) ===\n")
         print(user[:2500])
         return None
-    return llm.chat(messages, temperature=0.3, max_tokens=800)
+    return llm.chat(messages, temperature=0.3, max_tokens=MAX_TOKENS.get(level, 1000))
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
