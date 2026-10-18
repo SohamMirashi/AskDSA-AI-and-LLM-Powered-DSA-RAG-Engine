@@ -1,0 +1,668 @@
+Final Project Vision
+
+You are no longer building:
+
+“a chatbot with RAG”
+
+You are building:
+
+An AI-powered browser extension for coding interview preparation,
+integrated with coding platforms like LeetCode, GFG, Codeforces,
+CodeChef, HackerRank, etc.
+
+Core capabilities:
+
+automatic problem detection
+company-specific analytics
+AI hints/tutoring
+similar problem retrieval
+recommendation engine
+adaptive learning
+intelligent search/ranking
+real-time assistance
+
+And your stack is now:
+
+Layer	Tech
+Frontend Extension	React + TypeScript + Plasmo
+Backend APIs	Go
+High-Performance Engine	C++
+AI/RAG Layer	Python
+Cache	Redis
+Database	PostgreSQL
+Vector DB	ChromaDB/Qdrant
+Search	BM25/Inverted Index (C++)
+Deployment	Docker + AWS
+Monitoring	Prometheus + Grafana
+COMPLETE END-TO-END ARCHITECTURE ROADMAP
+PHASE 1 — SYSTEM DESIGN & PLANNING
+Step 1 — Define System Modules
+
+Split project into proper services.
+
+Recommended structure:
+
+/browser-extension
+/go-api-gateway
+/cpp-retrieval-engine
+/python-ai-service
+/data-pipeline
+/vector-db
+/cache
+/recommendation-engine
+/deployment
+/monitoring
+
+This is important for:
+
+scalability
+clean architecture
+resume quality
+Step 2 — Define Features
+CORE FEATURES
+Browser Extension
+detect current coding problem
+inject AI panel into website
+Retrieval Engine
+similar problems
+company-wise retrieval
+topic search
+AI Assistant
+hints
+explanations
+debugging help
+roadmap suggestions
+Recommendation System
+next best problems
+weak-topic recommendations
+Analytics
+company frequency
+topic trends
+readiness score
+PHASE 2 — DATA COLLECTION & INGESTION
+
+This is your data engineering layer.
+
+Step 3 — Collect Datasets
+
+You need multiple datasets.
+
+A. Coding Problems Dataset
+
+Platforms:
+
+LeetCode
+GFG
+Codeforces
+CodeChef
+HackerRank
+
+Collect:
+
+title
+statement
+constraints
+examples
+tags
+difficulty
+B. Company Question Dataset
+
+From the repository you mentioned.
+
+Convert into structured format.
+
+Example:
+
+{
+  "company": "Google",
+  "problem": "Word Ladder",
+  "difficulty": "Hard",
+  "frequency": "High",
+  "topics": ["BFS", "Graphs"]
+}
+C. Editorial/Solution Dataset
+
+Collect:
+
+brute force
+optimized approach
+explanation
+complexity
+Step 4 — Build Scraping Pipeline
+
+Use:
+
+Playwright
+BeautifulSoup
+Selenium
+Pipeline
+Website
+   ↓
+Scraper
+   ↓
+Raw JSON
+   ↓
+Cleaner
+   ↓
+Chunker
+   ↓
+Embedding Service
+   ↓
+Vector DB
+Step 5 — Data Cleaning Engine
+
+Remove:
+
+HTML
+duplicate content
+broken formatting
+ads/navigation text
+
+Normalize:
+
+markdown
+code blocks
+spacing
+Step 6 — Problem Chunking Engine
+
+Very important for RAG quality.
+
+Chunk into:
+
+Problem Statement
+Constraints
+Examples
+Hints
+Approach
+Complexity
+Code
+Step 7 — Metadata Engineering
+
+Store metadata carefully.
+
+Example:
+
+{
+  "platform": "leetcode",
+  "difficulty": "medium",
+  "topic": "graphs",
+  "pattern": "bfs",
+  "company": ["google", "amazon"],
+  "frequency": "high"
+}
+
+This powers:
+
+filtering
+recommendations
+analytics
+PHASE 3 — VECTORIZATION & AI DATA LAYER
+
+Only necessary Python here.
+
+Step 8 — Python Embedding Service
+
+Use Python because AI ecosystem is strongest there.
+
+Responsibilities:
+
+embedding generation
+chunk vectorization
+semantic similarity preparation
+Recommended Models
+
+Start:
+
+BGE-small
+E5-small
+
+Later:
+
+OpenAI embeddings
+InstructorXL
+Step 9 — Vector Database Setup
+
+Use:
+
+ChromaDB initially
+OR
+Qdrant later
+
+Store:
+
+embeddings
+chunk text
+metadata
+Step 10 — Embedding Ingestion Pipeline
+
+Pipeline:
+
+Chunk
+ ↓
+Embedding Model
+ ↓
+Vector
+ ↓
+Store in Vector DB
+PHASE 4 — C++ HIGH-PERFORMANCE RETRIEVAL ENGINE
+
+This becomes your strongest engineering component.
+
+Step 11 — Build C++ Inverted Index
+
+Implement:
+
+token indexing
+keyword search
+prefix search
+
+This powers:
+
+fast keyword retrieval
+autocomplete
+BM25
+Step 12 — Build BM25 Retrieval Engine
+
+Implement:
+
+term frequency
+inverse document frequency
+scoring logic
+
+This enables:
+
+traditional search + semantic search
+Step 13 — Build Hybrid Retrieval System
+
+Combine:
+
+vector similarity
+BM25 score
+metadata score
+
+Example:
+
+FinalScore =
+0.6 semantic +
+0.3 BM25 +
+0.1 metadata
+Step 14 — Build MMR Reranking Engine
+
+Implement:
+
+Maximal Marginal Relevance
+
+Purpose:
+avoid duplicate retrievals.
+
+Step 15 — Build Similarity Recommendation Engine
+
+Recommend:
+
+similar problems
+prerequisite problems
+advanced variants
+
+Use:
+
+graph relationships
+embedding similarity
+topic similarity
+Step 16 — Build Company Analytics Engine
+
+Features:
+
+most asked problems
+company trends
+topic distribution
+
+Example:
+
+Google:
+40% Graphs
+30% DP
+20% Trees
+Step 17 — Build Multithreaded Retrieval Pipelines
+
+Use C++ concurrency for:
+
+reranking
+retrieval batching
+indexing
+recommendation generation
+
+This becomes huge resume value.
+
+PHASE 5 — GO BACKEND & ORCHESTRATION
+
+Go handles the production infrastructure.
+
+Step 18 — Build Go API Gateway
+
+Endpoints:
+
+/detect-problem
+/retrieve
+/recommend
+/chat
+/company-analysis
+/debug
+Step 19 — Build Concurrent Retrieval Orchestration
+
+Go concurrently calls:
+
+vector DB
+C++ retrieval service
+Redis cache
+Python AI service
+
+This is where Go shines.
+
+Step 20 — Build Authentication System
+
+Use:
+
+JWT auth
+session handling
+API security
+Step 21 — Build Redis Caching Layer
+
+Cache:
+
+retrieval results
+embeddings
+AI responses
+recommendations
+
+Critical for:
+
+low latency
+reduced costs
+Step 22 — Build Streaming System
+
+Use:
+
+SSE
+OR
+WebSockets
+
+For:
+
+real-time AI responses
+typing effect
+Step 23 — Build API Rate Limiting
+
+Prevent abuse.
+
+Use:
+
+Redis token bucket
+middleware
+PHASE 6 — PYTHON AI/RAG LAYER
+
+Only where necessary.
+
+Step 24 — Build RAG Context Builder
+
+Responsibilities:
+
+collect retrieved chunks
+compress context
+organize prompts
+Step 25 — Build Prompt Pipeline
+
+Dynamic prompt generation:
+
+System Prompt
++ Retrieved Context
++ Problem Metadata
++ User Query
+Step 26 — Build AI Hint Engine
+
+Instead of giving full solutions.
+
+Generate:
+
+gradual hints
+complexity nudges
+optimization suggestions
+Step 27 — Build AI Debugging Assistant
+
+Analyze:
+
+user code
+edge cases
+complexity issues
+Step 28 — Build Hallucination Reduction Layer
+
+Strategies:
+
+retrieval grounding
+confidence scoring
+source attribution
+fallback responses
+PHASE 7 — BROWSER EXTENSION
+
+This is your user-facing product.
+
+Step 29 — Build Browser Extension
+
+Use:
+
+React
+TypeScript
+Plasmo
+Step 30 — Detect Current Problem Automatically
+
+Extension extracts:
+
+title
+difficulty
+platform
+tags
+
+from:
+
+LeetCode
+GFG
+Codeforces
+etc.
+Step 31 — Inject Smart AI Sidebar
+
+Sidebar shows:
+
+hints
+similar problems
+company frequency
+recommendations
+analytics
+Step 32 — Add Company Intelligence Panel
+
+Example:
+
+Asked in:
+Google
+Amazon
+Uber
+Step 33 — Add Smart Recommendation UI
+
+Recommend:
+
+next problems
+weak-topic practice
+prerequisite problems
+Step 34 — Add User Tracking
+
+Track:
+
+solved problems
+weak areas
+progress
+readiness score
+
+Store in PostgreSQL.
+
+PHASE 8 — DATABASES & STORAGE
+Step 35 — PostgreSQL Setup
+
+Store:
+
+users
+progress
+analytics
+bookmarks
+revision notes
+Step 36 — Redis Setup
+
+Store:
+
+cache
+session data
+rate limits
+Step 37 — Vector DB Setup
+
+Store:
+
+embeddings
+semantic chunks
+metadata
+PHASE 9 — DEPLOYMENT & DEVOPS
+
+Now production engineering.
+
+Step 38 — Dockerize Everything
+
+Containers for:
+
+Go backend
+C++ service
+Python AI service
+Redis
+PostgreSQL
+Step 39 — Build CI/CD Pipeline
+
+Use:
+
+GitHub Actions
+
+Pipeline:
+
+Push
+ ↓
+Test
+ ↓
+Build Docker Images
+ ↓
+Deploy
+Step 40 — AWS Deployment
+
+Recommended architecture:
+
+EC2
+
+Run:
+
+Go backend
+C++ retrieval engine
+ECS/EKS Later
+
+For scaling microservices.
+
+S3
+
+Store:
+
+logs
+datasets
+backups
+CloudFront
+
+Frontend CDN.
+
+Step 41 — Monitoring & Logging
+
+Use:
+
+Prometheus
+Grafana
+
+Track:
+
+API latency
+retrieval time
+cache hit rate
+AI response time
+Step 42 — Observability
+
+Add:
+
+structured logging
+distributed tracing
+request tracking
+PHASE 10 — ADVANCED FEATURES
+
+These make project elite-tier.
+
+Step 43 — Adaptive Retrieval Pipelines
+
+Different retrieval strategies for:
+
+hints
+debugging
+recommendations
+interview prep
+Step 44 — Personalized Learning Engine
+
+Analyze:
+
+weak topics
+solve speed
+company goals
+
+Generate:
+
+learning roadmaps
+Step 45 — Interview Simulation Mode
+
+AI mock interviewer:
+
+asks questions
+gives hints
+evaluates approach
+FINAL PRODUCTION ARCHITECTURE
+Browser Extension (React + TS)
+              ↓
+         Go API Gateway
+              ↓
+------------------------------------------------
+|             |              |                 |
+↓             ↓              ↓                 ↓
+Redis     PostgreSQL    C++ Retrieval     Python AI
+Cache         DB            Engine          Service
+                                 ↓
+                         Vector DB (Qdrant)
+What Makes This Project Elite
+
+This project now demonstrates:
+
+Domain	Skills
+AI Systems	RAG, embeddings, retrieval
+Backend	Go APIs, streaming
+Systems	C++ optimization
+Search Engines	BM25, reranking
+Browser Engineering	extensions
+Distributed Systems	microservices
+DevOps	Docker, AWS
+Databases	PostgreSQL, Redis
+Recommendation Systems	adaptive learning
+This Is Now Comparable To
+
+The type of engineering seen in:
+
+interview prep startups
+AI developer tooling
+coding assistant platforms
+search/retrieval infrastructure teams
+ed-tech AI systems
+
+This is no longer a “student chatbot project.”
