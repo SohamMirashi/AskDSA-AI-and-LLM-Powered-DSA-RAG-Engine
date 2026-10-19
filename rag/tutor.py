@@ -31,7 +31,10 @@ SYSTEM = (
     "Your job is to help the student UNDERSTAND and reach the solution themselves, not to "
     "hand over the answer. Ground every claim in the provided CONTEXT; if the context does "
     "not cover something, say so rather than inventing it. "
-    "Never reveal more than the requested hint level asks for."
+    "Never reveal more than the requested hint level asks for. "
+    "FORMATTING: Do NOT use LaTeX or math delimiters ($, $$, \\( \\), \\[ \\]) or commands "
+    "like \\binom, \\frac, \\times, \\text. Write math in plain text: combinations as "
+    "C(n, k), multiply as ×, powers as ^ (e.g. 10^9 + 7), fractions as a/b."
 )
 
 def build_context(results):

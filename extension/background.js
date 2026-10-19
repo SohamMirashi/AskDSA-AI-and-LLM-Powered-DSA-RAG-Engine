@@ -1,7 +1,8 @@
 // Service worker: does the API call so it isn't blocked by the page's CSP,
 // and toggles the panel when the toolbar icon is clicked.
 
-const API_BASE = "http://127.0.0.1:8000";
+// const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://askdsa.app";
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === "tutor") {

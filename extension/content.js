@@ -24,12 +24,41 @@
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
       .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
   }
+
+  // ---------- LaTeX -> readable plain text (panel can't typeset math) ----------
+  function texToText(x) {
+    return x
+      .replace(/\\left|\\right/g, "")
+      .replace(/\\binom\{([^{}]*)\}\{([^{}]*)\}/g, "C($1, $2)")
+      .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "($1)/($2)")
+      .replace(/\\sqrt\{([^{}]*)\}/g, "√($1)")
+      .replace(/\\text(?:bf|it)?\{([^{}]*)\}/g, "$1")
+      .replace(/\\times/g, "×").replace(/\\cdot/g, "·")
+      .replace(/\\leq?\b/g, "≤").replace(/\\geq?\b/g, "≥").replace(/\\neq\b/g, "≠")
+      .replace(/\\log\b/g, "log").replace(/\\in\b/g, "∈").replace(/\\infty/g, "∞")
+      .replace(/\^\{([^{}]*)\}/g, "^($1)").replace(/_\{([^{}]*)\}/g, "_$1")
+      .replace(/\\,|\\;|\\!|\\ /g, " ")
+      .replace(/[{}]/g, "")
+      .trim();
+  }
+  function stripMath(s) {
+    return s
+      .replace(/\$\$([\s\S]*?)\$\$/g, (_m, x) => "\n" + texToText(x) + "\n")
+      .replace(/\\\[([\s\S]*?)\\\]/g, (_m, x) => "\n" + texToText(x) + "\n")
+      .replace(/\$([^$\n]+)\$/g, (_m, x) => texToText(x))
+      .replace(/\\\(([\s\S]*?)\\\)/g, (_m, x) => texToText(x));
+  }
+
   function renderMarkdown(md) {
     const blocks = [];
     md = md.replace(/```[a-zA-Z0-9]*\n?([\s\S]*?)```/g, (_m, code) => {
       blocks.push(code.replace(/\n+$/, ""));
       return `\u0000B${blocks.length - 1}\u0000`;
     });
+
+    md = stripMath(md);          // <-- add this line
+    md = escapeHtml(md);
+
     md = escapeHtml(md);
     const out = [];
     let list = null;
