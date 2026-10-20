@@ -190,9 +190,3 @@ Update flow: push code to GitHub → `git pull` on the server → `sudo systemct
 - The knowledge base currently covers **GeeksforGeeks** problems; other sites work best once their content is added.
 - Answers are AI‑generated and meant to **assist learning**, not to be copied blindly — always verify code and complexity claims.
 - First response after a cold start can be a little slower while the embedding model warms up.
-
----
-
-## 📄 License
-
-Add your preferred license here (e.g. MIT).
